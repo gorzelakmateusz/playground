@@ -1,0 +1,13 @@
+[Unit]
+Description=Spotify Organizer React Application
+After=network.target
+
+[Service]
+ExecStart=npm start
+WorkingDirectory=/home/ubuntu/spotify_organizer/client
+Restart=always
+User=ubuntu
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

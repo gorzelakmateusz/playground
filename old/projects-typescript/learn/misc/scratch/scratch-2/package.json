@@ -1,0 +1,20 @@
+{
+  "name": "scratch-2",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon --exec tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist",
+    "lint": "echo 'Add ESLint for production setup'",
+    "test": "echo 'Add Jest for production setup'"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x.x",
+    "nodemon": "^3.x.x",
+    "tsx": "^4.20.3",
+    "typescript": "^5.x.x"
+  }
+}

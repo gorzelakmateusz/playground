@@ -1,0 +1,20 @@
+{
+  "name": "scratch-3",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node --loader ts-node/esm src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist",
+    "lint": "echo 'Add ESLint for production setup'",
+    "test": "echo 'Add Jest for production setup'"
+  },
+  "devDependencies": {
+    "typescript": "^5.x.x",
+    "ts-node": "^10.x.x",
+    "@types/node": "^20.x.x",
+    "nodemon": "^3.x.x"
+  }
+}

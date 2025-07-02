@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2024", // Najnowszy standard ECMAScript
+    "lib": ["es2024", "dom"], // Włącz typy dla ES2024 i typy DOM (gdzie jest 'console')
+    // LUB "lib": ["ESNext", "DOM"]
+    // LUB "lib": ["Node"] (jeśli chcesz tylko typy Node.js)
+    "module": "NodeNext", // Użyj nowoczesnego systemu modułów Node.js (ES Modules)
+    "moduleResolution": "NodeNext", // Rozwiązuj moduły zgodnie z logiką Node.js
+    "esModuleInterop": true, // Ułatwia importowanie CommonJS do ESM
+    "forceConsistentCasingInFileNames": true, // Wymusza spójną wielkość liter
+    "strict": true, // Włącz wszystkie rygorystyczne sprawdzanie typów
+    "skipLibCheck": true, // Pomiń sprawdzanie typów dla plików deklaracji bibliotek
+    "outDir": "./dist", // Katalog wyjściowy dla skompilowanych plików
+    "sourceMap": true // Generuj mapy źródłowe do debugowania
+  },
+  "include": ["src/**/*.ts"], // Uwzględnij pliki TypeScript z katalogu src
+  "exclude": ["node_modules"] // Wyklucz katalog node_modules
+}

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Paddle Example</title>
+    <style>
+      canvas {
+        border: 1px solid #0e0d0d;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="1000" height="600">canvas</canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      const points = {
+        p1Score: 0,
+        p2Score: 0,
+        p1ScoreCords: { x: canvas.width / 3, y: canvas.height / 10 },
+        p2ScoreCords: { x: (canvas.width / 3) * 2, y: canvas.height / 10 },
+      };
+
+      const paddleConfig = {
+        width: 20,
+        height: 100,
+        margin: 10,
+      };
+
+      const paddle1 = {
+        x: paddleConfig.margin,
+        y: (canvas.height - paddleConfig.height) / 2,
+        width: paddleConfig.width,
+        height: paddleConfig.height,
+        move: "no",
+      };
+
+      const paddle2 = {
+        x: canvas.width - paddleConfig.width - paddleConfig.margin,
+        y: (canvas.height - paddleConfig.height) / 2,
+        width: paddleConfig.width,
+        height: paddleConfig.height,
+        move: "no",
+      };
+
+      const ball = {
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        radius: 20,
+        speedX: 6,
+        speedY: 6,
+      };
+
+      let gamePaused = false;
+      const stateUpdateInterval = 20;
+
+      function clearCanvas(ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      function drawBall(ball, ctx, color = "black") {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      function drawPaddle(paddle, ctx, color = "black") {
+        ctx.fillStyle = color;
+        ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+      }
+
+      function drawText(
+        text,
+        ctx,
+        color = "black",
+        fontSize = "30px",
+        fontFamily = "Arial",
+        x = 10,
+        y = 100,
+      ) {
+        ctx.font = `${fontSize} ${fontFamily}`;
+        ctx.fillStyle = color;
+        ctx.fillText(text, x, y);
+      }
+
+      function drawPoints(points, ctx, color = "black") {
+        drawText(
+          points.p2Score.toString(),
+          ctx,
+          color,
+          "30px",
+          "Arial",
+          points.p2ScoreCords.x,
+          points.p2ScoreCords.y,
+        );
+        drawText(
+          points.p1Score.toString(),
+          ctx,
+          color,
+          "30px",
+          "Arial",
+          points.p1ScoreCords.x,
+          points.p1ScoreCords.y,
+        );
+      }
+
+      function drawState() {
+        clearCanvas(ctx);
+        drawPaddle(paddle1, ctx);
+        drawPaddle(paddle2, ctx, "black");
+        drawBall(ball, ctx);
+        drawPoints(points, ctx);
+      }
+
+      function updateState() {
+        ball.x += ball.speedX;
+        ball.y += ball.speedY;
+
+        if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+          ball.speedY *= -1;
+        }
+
+        if (ball.x + ball.radius > canvas.width) {
+          points.p1Score += 1;
+          resetBall();
+        } else if (ball.x - ball.radius < 0) {
+          points.p2Score += 1;
+          resetBall();
+        }
+
+        if (
+          ball.x > paddle2.x &&
+          ball.x < paddle2.x + paddle2.width &&
+          ball.y > paddle2.y &&
+          ball.y < paddle2.y + paddle2.height
+        ) {
+          ball.speedX *= -1;
+        }
+
+        if (
+          ball.x > paddle1.x &&
+          ball.x < paddle1.x + paddle1.width &&
+          ball.y > paddle1.y &&
+          ball.y < paddle1.y + paddle1.height
+        ) {
+          ball.speedX *= -1;
+        }
+
+        movePaddle(paddle1);
+        movePaddle(paddle2);
+      }
+
+      function movePaddle(paddle) {
+        const speed = 5;
+        if (paddle.move === "up" && paddle.y - speed > 0) {
+          paddle.y -= speed;
+        } else if (
+          paddle.move === "down" &&
+          paddle.y + speed < canvas.height - paddle.height
+        ) {
+          paddle.y += speed;
+        }
+      }
+
+      function resetBall() {
+        ball.x = canvas.width / 2;
+        ball.y = canvas.height / 2;
+        ball.speedX *= -1;
+      }
+
+      function updateAndDrawState() {
+        if (!gamePaused) {
+          updateState();
+          drawState();
+        } else {
+          drawText(
+            "Paused",
+            ctx,
+            "red",
+            "40px",
+            "Arial",
+            canvas.width / 2 - 50,
+            canvas.height / 2,
+          );
+        }
+      }
+
+      window.addEventListener("keydown", (e) => {
+        switch (e.key) {
+          case "ArrowUp":
+            paddle1.move = "up";
+            break;
+          case "ArrowDown":
+            paddle1.move = "down";
+            break;
+          case "w":
+            paddle2.move = "up";
+            break;
+          case "s":
+            paddle2.move = "down";
+            break;
+          case "Escape":
+            gamePaused = !gamePaused;
+            break;
+        }
+      });
+
+      setInterval(updateAndDrawState, stateUpdateInterval);
+    </script>
+  </body>
+</html>

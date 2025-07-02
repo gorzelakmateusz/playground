@@ -8,7 +8,7 @@
 playground/
 ├── dev-assets/          # Notes, snippets, and miscellaneous dev resources
 ├── old/                 # Old experiments kept for reference
-└── projects-typescript/ # Actively maintained and new TypeScript projects
+└── scratch/             # Experimental projects, quick tests, and playground code
 ```
 
 ## ✨ Purpose

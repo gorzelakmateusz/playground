@@ -14,6 +14,7 @@ playground/
 ## ✨ Purpose
 
 This repository serves as a sandbox for:
+
 - Archiving old code I want to keep for reference
 - Developing new TypeScript-based projects
 - Storing notes, thoughts, and useful resources

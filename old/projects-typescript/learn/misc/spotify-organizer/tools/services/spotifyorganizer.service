@@ -1,0 +1,13 @@
+[Unit]
+Description=Spotify Organizer Node.js Application
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node /home/ubuntu/spotify_organizer/server/index.js
+WorkingDirectory=/home/ubuntu/spotify_organizer
+Restart=always
+User=ubuntu
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

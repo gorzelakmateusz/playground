@@ -8,6 +8,7 @@
 playground/
 ├── dev-assets/          # Notes, snippets, and miscellaneous dev resources
 ├── old/                 # Old experiments kept for reference
+├── portfolio            # My personal portfolio website
 └── scratch/             # Experimental projects, quick tests, and playground code
 ```
 

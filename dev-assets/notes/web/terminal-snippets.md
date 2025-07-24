@@ -2,7 +2,8 @@
 
 ## 📦 Package Management (pnpm/npm)
 
-pnpm install <package> # Install specified package  
+pnpm install <package> # Install specified package 
+pnpm i <package>
 pnpm install -D <package> # Install as dev dependency  
 pnpm install # Install all dependencies  
 pnpm update # Update all packages  

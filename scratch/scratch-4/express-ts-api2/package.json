@@ -2,13 +2,13 @@
   "name": "express-ts-api2",
   "version": "0.0.0",
   "scripts": {
-    "build": "ts-node ./scripts/build.ts",
+    "build": "tsc",
     "clean-install": "rm -rf ./node_modules && rm -r package-lock.json && npm i",
-    "dev": "NODE_ENV=development ts-node ./src",
+    "dev": "cross-env NODE_ENV=development ts-node ./src/index.ts",
     "dev:hot": "nodemon --exec \"npm run dev\" --watch ./src --ext .ts",
     "lint": "eslint .",
-    "start": "NODE_ENV=production node -r ./config.js ./dist",
-    "test": "NODE_ENV=test vitest",
+    "start": "cross-env NODE_ENV=production node ./dist/index.js",
+    "test": "cross-env NODE_ENV=test vitest",
     "type-check": "tsc --noEmit"
   },
   "engines": {
@@ -42,6 +42,7 @@
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.1.0",
     "@types/supertest": "^6.0.3",
+    "cross-env": "^7.0.3",
     "eslint": "^9.31.0",
     "eslint-plugin-n": "^17.21.0",
     "find": "^0.3.0",

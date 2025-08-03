@@ -11,7 +11,7 @@ let ventState: number = 0;
 app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello world, from Express!" + req);
+  res.send("Hello world, from Express!" + req.url);
 });
 
 app.get("/api/esp32-vent/data", (req: Request, res: Response) => {
@@ -37,7 +37,7 @@ app.post(
       });
     } else {
       logger.warn(
-        `Invalid command received. Expected value 0 or 1, got: ${value}`
+        `Invalid command qreceived. Expected value 0 or 1, got: ${value}`
       );
       res.status(400).json({
         error: "Invalid input. 'value' must be 0 or 1.",

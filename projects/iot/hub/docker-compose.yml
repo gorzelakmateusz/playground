@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  iot-hub-app:
+    image: iot-hub-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
